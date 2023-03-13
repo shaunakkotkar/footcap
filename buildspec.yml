@@ -4,18 +4,18 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - $(aws ecr get-login --no-include-email --region ap-south-1)
+      - $(aws ecr get-login --no-include-email --region us-east-1)
   build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
       - docker build -t footcap .
-      - docker tag footcap:latest 377250213022.dkr.ecr.ap-south-1.amazonaws.com/footcap:latest
+      - docker tag footcap:latest 709969862601.dkr.ecr.us-east-1.amazonaws.com/footcap:latest
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker images...
-      - docker push 377250213022.dkr.ecr.ap-south-1.amazonaws.com/footcap:latest
+      - docker push 709969862601.dkr.ecr.us-east-1.amazonaws.com/footcap:latest
       - echo Writing image definitions file...
       - printf '[{"name":"footcap","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
 artifacts:
